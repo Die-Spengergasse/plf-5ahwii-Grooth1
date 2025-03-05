@@ -114,8 +114,7 @@ class Guess extends Code {
         master = master || this.parent.master.getPrimitive();
         this.bewertung = this.getBewertung(master, this.getPrimitive());
         this.parent.notify(
-            `Bewertung: ${this.bewertung[0]} schwarze und ${this.bewertung[1]
-            } weisse`,
+            `Bewertung: ${this.bewertung[0]} schwarze und ${this.bewertung[1]} weisse`,
         );
         this.updateBewertungDisplay();
         if (!this.alreadyEvaluated) {
