@@ -2,7 +2,6 @@
 class Main {
     master = null;
     guesses = null;
-
     domMasterField = null;
     domGuessesField = null;
     domNotifyBox = null;
