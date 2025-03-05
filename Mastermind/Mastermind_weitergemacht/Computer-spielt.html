@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mastermind</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                background-image: url("background.jpg");
+                background-size: cover;
+                color: white;
+            }
+            .container {
+                margin-top: 50px;
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 20px;
+                border-radius: 10px;
+                display: inline-block;
+            }
+            .color-box {
+                width: 50px;
+                height: 50px;
+                display: inline-block;
+                margin: 5px;
+                border: 2px solid white;
+                border-radius: 5px;
+            }
+            button {
+                margin-top: 10px;
+                padding: 10px;
+                background-color: #4caf50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #45a049;
+            }
+            .code-display {
+                font-size: 20px;
+                font-weight: bold;
+                margin: 20px;
+            }
+            label {
+                display: block;
+                margin: 10px 0 5px;
+            }
+            input[type="number"] {
+                width: 50px;
+                padding: 5px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Mastermind</h1>
+            <p id="codeDisplay" class="code-display">
+                Geheime Farben werden generiert...
+            </p>
+            <p id="guessDisplay" class="code-display">
+                Der Computer macht einen Vorschlag...
+            </p>
+            <div id="colorInputs">
+                <!-- Farbige Boxen werden hier eingefügt -->
+            </div>
+            <div>
+                <label for="blackPins">Schwarze Pins:</label>
+                <input type="number" id="blackPins" min="0" max="4">
+                <label for="whitePins">Weiße Pins:</label>
+                <input type="number" id="whitePins" min="0" max="4">
+            </div>
+            <button id="submitFeedback">Feedback senden</button>
+            <button id="autoFillButton">Auto Fill</button>
+            <button onclick="window.location.href='index.html'">
+                Zum normalen Spiel
+            </button>
+        </div>
+
+        <script src="color2.js"></script>
+        <script src="Computer-spielt.js"></script>
+    </body>
+</html>

@@ -12,3 +12,5 @@ setInt und randomize verknüpft
 5. Computerspielt- Webseite in anderer Index Datei verlinkt und umgekehrt
 
 6.Selber bewerten mit Pop-UP Eingabe
+
+7. Hinzufügen des Computer-Raten Modus 
