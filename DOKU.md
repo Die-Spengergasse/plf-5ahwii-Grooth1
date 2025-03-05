@@ -9,4 +9,6 @@ setInt und randomize verknüpft
 
 4. Zusammenlegen mehrerer Methoden im Code.js (Beibehaltung der Variablen)
 
-5. 
+5. Computerspielt- Webseite in anderer Index Datei verlinkt und umgekehrt
+
+6.
