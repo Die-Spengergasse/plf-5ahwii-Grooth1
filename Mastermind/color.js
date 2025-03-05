@@ -2,12 +2,6 @@
 
 // Klasse für EINEN STECKER (PEG)
 class Color {
-    obj = undefined;
-    currentValue = undefined;
-    visible = undefined;
-    isUpdated = undefined;
-    domObj = null;
-
     static rgbValues = [
         "#ff0000",
         "#00ff00",
@@ -17,7 +11,6 @@ class Color {
         "#ff00ff",
     ];
 
-    // liefere mir den RGB String für 0 .. 5
     static getRGB(i) {
         return this.rgbValues[i % this.rgbValues.length];
     }
@@ -29,9 +22,7 @@ class Color {
         this.isUpdated = false;
         this.domObj = document.createElement("div");
         this.domObj.obj = this;
-        this.domObj.classList.add("circle");
-        this.domObj.classList.add("peg");
-        this.domObj.classList.add(`s${num}`);
+        this.domObj.classList.add("circle", "peg", `s${num}`);
         this.domObj.addEventListener("click", (e) => {
             e.target.obj.rotate();
         });
@@ -39,24 +30,19 @@ class Color {
 
     updateDisplay(visible = true) {
         this.visible = visible;
-        // cl("update", this, visible)
-        if (visible) {
-            this.domObj.style.backgroundColor = Color.getRGB(this.currentValue);
-        } else {
-            this.domObj.style.backgroundColor = "#ddd";
-        }
+        this.domObj.style.backgroundColor = visible
+            ? Color.getRGB(this.currentValue)
+            : "#ddd";
     }
 
-    setInt(i) {
+    setColor(i, visible = true) {
         this.currentValue = i;
-        this.updateDisplay(true);
+        this.updateDisplay(visible);
         this.isUpdated = true;
     }
 
     randomize() {
-        this.currentValue = Math.floor(Math.random() * 6);
-        this.updateDisplay(false);
-        this.isUpdated = true;
+        this.setColor(Math.floor(Math.random() * 6), false);
     }
 
     rotate() {
@@ -64,11 +50,10 @@ class Color {
             this.obj.parent.notify("Ist unsichtbar -> Keine Änderung");
             return;
         }
-        if (!this.isUpdated) {
-            this.isUpdated = true;
-        } else {
-            this.currentValue = (this.currentValue + 1) % 6;
-        }
+        this.currentValue = this.isUpdated
+            ? (this.currentValue + 1) % 6
+            : this.currentValue;
+        this.isUpdated = true;
         this.updateDisplay(true);
     }
 }

@@ -4,3 +4,5 @@
 
 1. Variablennamen von bewCount zu evaluationCount geändert
 2. isBewerted zu already Evaluated
+3. In color.js: Direkt am Anfang Variablen initiiert
+setInt und randomize verknüpft
