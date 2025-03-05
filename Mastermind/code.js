@@ -4,7 +4,7 @@ class Code {
     domObj = null;
     colorArray = null;
     visible = true;
-    isBewerted = false;
+    alreadyEvaluated = false;
 
     constructor(parent) {
         this.parent = parent; // parent = main
@@ -108,7 +108,7 @@ class Guess extends Code {
             parent.notify("Ich kenne die richtige Lösung ;)");
         } else {
             parent.notify(
-                `Neuer Versuch, ${possibilities.length} gültige Möglichkeiten`
+                `Neuer Versuch, ${possibilities.length} gültige Möglichkeiten`,
             );
         }
         this.possibilitiesInherited = possibilities;
@@ -152,7 +152,7 @@ class Guess extends Code {
     }
 
     bewerte(master = null) {
-        let bewCount;
+        let evaluationCount;
         if (!this.isComplete()) {
             this.parent.notify("Code ist nicht fertig, kann nicht bewerten");
             return;
@@ -165,27 +165,29 @@ class Guess extends Code {
         // this.parent.notify(`guessA: ${this.bewertung}`)
         this.bewertung = this.getBewertung(master, this.bewertung);
         this.parent.notify(
-            `Bewertung: ${this.bewertung[0]} schwarze und ${this.bewertung[1]} weisse`
+            `Bewertung: ${this.bewertung[0]} schwarze und ${
+                this.bewertung[1]
+            } weisse`,
         );
-        bewCount = 1;
+        evaluationCount = 1;
         for (let i = 0; i < this.bewertung[0]; i++) {
             this.domObj.getElementsByClassName(
-                `b${bewCount}`
+                `b${evaluationCount}`,
             )[0].style.backgroundColor = "#000";
-            bewCount++;
+            evaluationCount++;
         }
         for (let i = 0; i < this.bewertung[1]; i++) {
             this.domObj.getElementsByClassName(
-                `b${bewCount}`
+                `b${evaluationCount}`,
             )[0].style.backgroundColor = "#fff";
-            bewCount++;
+            evaluationCount++;
         }
-        for (; bewCount <= 4; bewCount++) {
+        for (; evaluationCount <= 4; evaluationCount++) {
             this.domObj.getElementsByClassName(
-                `b${bewCount}`
+                `b${evaluationCount}`,
             )[0].style.backgroundColor = "#888";
         }
-        if (!this.isBewerted) {
+        if (!this.alreadyEvaluated) {
             if (this.bewertung[0] < 4) {
                 this.parent.prependGuess();
             } else {
@@ -194,7 +196,7 @@ class Guess extends Code {
         } else {
             this.parent.notify("Ist schon bewertet!");
         }
-        this.isBewerted = true;
+        this.alreadyEvaluated = true;
     }
 
     getPossibilities() {
@@ -204,7 +206,7 @@ class Guess extends Code {
             if (
                 this.arraysEqual(
                     this.getBewertung(poss, primitivThis),
-                    this.bewertung
+                    this.bewertung,
                 )
             ) {
                 rw.push(poss);
@@ -297,11 +299,12 @@ class DiversityMap extends Map {
     getFullestArray() {
         let max = 0;
         let rw;
-        for (let i of this.keys())
+        for (let i of this.keys()) {
             if (this.get(i).length > max) {
                 max = this.get(i).length;
                 rw = this.get(i);
             }
+        }
         return rw;
     }
     getMostDiverseArray() {
